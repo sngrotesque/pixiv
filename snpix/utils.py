@@ -25,5 +25,5 @@ def fread(filePath :str):
 def timeSleep(min_value :float = 0, max_value :float = None):
     sleep(rand_float(min_value, max_value))
 
-def jdumps(data):
+def jdumps(data :dict):
     return jdump(data, ensure_ascii=False)
