@@ -24,3 +24,6 @@ def fread(filePath :str):
 
 def timeSleep(min_value :float = 0, max_value :float = None):
     sleep(rand_float(min_value, max_value))
+
+def jload_no_encode(data):
+    
