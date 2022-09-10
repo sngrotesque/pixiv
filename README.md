@@ -1,4 +1,4 @@
-# Pixiv
+# Pixiv - Web crawler❤
 
 > 由SN-Grotesque开发并维护，主要采用Cookie对Pixiv网站进行爬取。<br>
 > 不涉及任何登录操作，只要你拥有自己的Cookie，那么你酒可以使用此程序。<br>
