@@ -8,10 +8,7 @@ class pixiv:
     Proxy       是可选的，使用代理加VPN对Pixiv官网进行访问。
     """
     def __init__(self,
-        YourOwnID :str,
-        ArtistID :str = None,
-        HTTP_Cookie :str = None,
-        Proxy :dict = None
+        YourOwnID :str, ArtistID :str = None, HTTP_Cookie :str = None, Proxy :dict = None
         ):
         self.DEFINED_YourID = YourOwnID
         self.DEFINED_ArtistID = ArtistID
