@@ -39,7 +39,7 @@ class pixiv:
             for ID_Index in TotalArtistID['body']['users']:
                 print(f"\r>>>> 已获取{serialNumber:>4}个ID | 本轮用户数: {len(TotalArtistID['body']['users'])}", end='')
                 self.RESULTS_ArtistNameID[f'{serialNumber:0>4}'] = {
-                    "userId": ID_Index['userId'],
+                    "userId": f'https://www.pixiv.net/users/{ID_Index['userId']}',
                     "userName": ID_Index['userName']
                 }
                 serialNumber += 1
