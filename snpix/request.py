@@ -42,7 +42,9 @@ class pixiv:
 
     @property
     def GetAllArtistArtworks(self):
-        pass
+        self.GetAllUsersID
+        
+        
 
 
 
