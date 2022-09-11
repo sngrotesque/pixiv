@@ -9,6 +9,6 @@ res = snpix.pixiv(SNGrotesqueID, HTTP_Cookie=Cookie, Proxy = Proxy)
 res.GetAllUsersNameID
 
 with open('000_ALL_Pixiv_Follow_list_new.json', 'w', encoding='utf-8') as f:
-    f.write(jdump(res.RESULTS_AuthorNameID, ensure_ascii=False))
+    f.write(jdump(res.RESULTS_ArtistNameID, ensure_ascii=False))
 
 
