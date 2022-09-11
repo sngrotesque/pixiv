@@ -51,6 +51,7 @@ class pixiv:
     def GetAllArtistArtworks(self):
         self.GetAllUsersID
         HTTP_Headers = {"User-Agent": self.DEFINED_UserAgent, "Cookie": self.DEFINED_Cookie}
+        serialNumber = 1
         
         for index in self.RESULTS_ArtistNameID:
             uid = self.RESULTS_ArtistNameID[index]['userId']
