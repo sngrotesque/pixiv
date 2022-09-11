@@ -51,7 +51,8 @@ class pixiv:
     def GetAllArtistArtworks(self):
         self.GetAllUsersID
         
-        for uid in self.RESULTS_ArtistNameID:
+        for index in self.RESULTS_ArtistNameID:
+            uid = 
             url = f'https://www.pixiv.net/ajax/user/{uid}/profile/all?lang=en'
             
 
