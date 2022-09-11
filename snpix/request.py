@@ -44,7 +44,7 @@ class pixiv:
 
     @property
     def GetArtworksOfSingleArtist(self):
-        
+        pass
 
     @property
     def GetAllArtistArtworks(self):
