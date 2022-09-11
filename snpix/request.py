@@ -29,7 +29,7 @@ class pixiv:
             if not TotalAuthorID['body']['users']: break
             
             for ID_Index in TotalAuthorID['body']['users']:
-                print(f"\r>>>> 已获取{serialNumber:>4}个ID | 本页用户数: {len(TotalAuthorID['body']['users'])}", end='')
+                print(f"\r>>>> 已获取{serialNumber:>4}个ID | 本轮用户数: {len(TotalAuthorID['body']['users'])}", end='')
                 self.RESULTS_AuthorNameID[f'{serialNumber:0>4}'] = {
                     "userId": ID_Index['userId'], "userName": ID_Index['userName']}
                 
