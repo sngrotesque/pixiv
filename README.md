@@ -12,8 +12,9 @@
 > 安装完毕之后请在你的计算机中设置环境变量以确保你可以正常使用Python。<br>
 > 请仔细<a href="#Python_Help">阅读文档</a>。
 
-> 本Pixiv代码库采用requests网络请求库<br>
-> 如果你的计算机中未安装此库请仔细<a href="#Requests_Help">阅读文档</a>。
+> 本Pixiv代码库采用的第三方库名如下<br>
+> requests, lxml<br>
+> 如果你的计算机中未安装这些库请仔细<a href="#Requests_Help">阅读文档</a>。
 
 <span id="Cookie_Help">Cookie 帮助文档</span>
 ```text
