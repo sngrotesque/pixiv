@@ -41,7 +41,7 @@ class pixiv:
                 serialNumber += 1
 
     @property
-    def GetArtworksArtist():
+    def Get links to all works of the artist():
         pass
 
 
