@@ -23,6 +23,7 @@ class pixiv:
         
         self.RESULTS_ArtistNameID = {}
         self.RESULTS_ArtistArtworks = {}
+        self.RESULTS_ArtworkPictures = {}
 
     @property
     def GetAllUsersID(self):
