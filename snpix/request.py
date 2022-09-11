@@ -1,6 +1,9 @@
 from .utils import *
 
 class pixiv:
+    """
+    YourOwnID是必须的，这个值代表你自己的PixivID，是网址栏的ID
+    """
     def __init__(self,
         YourOwnID :str,
         HTTP_Cookie :str = None,
@@ -34,4 +37,14 @@ class pixiv:
                     "userId": ID_Index['userId'], "userName": ID_Index['userName']}
                 
                 serialNumber += 1
+
+
+
+
+
+
+
+
+
+
 
