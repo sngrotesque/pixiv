@@ -60,7 +60,7 @@ class pixiv:
             url = f'https://www.pixiv.net/ajax/user/{uid}/profile/all?lang=en'
             ArtworkLinks = rget(url, headers = HTTP_Headers, proxies = self.DEFINED_Proxy, timeout = 3).json()
             for ArtworkID in ArtworkLinks['body']['illusts']:
-                print(f'>>>> {serialNumber:0>5} | {ArtworkID:>12}')
+                print(f'\r>>>> {serialNumber:0>5} | {ArtworkID:>12}', end='')
 
                 serialNumber += 1
 
