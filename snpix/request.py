@@ -14,6 +14,7 @@ class pixiv:
         Proxy :dict = None
         ):
         self.DEFINED_YourID = YourOwnID
+        self.DEFINED_ArtistID = ArtistID
         self.DEFINED_Cookie = HTTP_Cookie
         self.DEFINED_Proxy = Proxy
         
