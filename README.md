@@ -79,7 +79,7 @@
 Requests库是由Kenneth Reitz开发并维护的Python第三方库
 基于urllib3再次开发，许可证为Apache 2.0
 
-Lxml库是
+Lxml库是一个用于解析Web页面的库
 
 如果你需要安装此库请通过如下的指令进行安装
     python(或python3) -m pip install requests lxml
