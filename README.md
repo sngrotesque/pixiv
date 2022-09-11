@@ -4,7 +4,7 @@
 
 > 主要采用Cookie对Pixiv网站进行爬取。<br>
 > 不涉及任何登录操作，只要你拥有自己的Cookie，那么你就可以使用此程序。<br>
-> 如果你不知道Cookie如何获取，请仔细阅读以下文档。
+> 如果你不知道Cookie如何获取，请仔细<a href="#Cookie_Help">阅读文档</a>。
 
 ```text
 1.  首先打开你的电脑浏览器(此处以Microsoft Edge为例)
