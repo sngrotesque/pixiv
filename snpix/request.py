@@ -1,6 +1,6 @@
 from .utils import *
 
-def GetArtworksOfSingleArtist(ArtistID):
+def GetArtworksOfSingleArtist(self = None, ArtistID):
     pass
 
 class pixiv:
