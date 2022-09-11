@@ -33,9 +33,7 @@ class pixiv:
             url = f'https://www.pixiv.net/ajax/user/{self.DEFINED_YourID}/following?offset={page}&limit={self.DEFINED_BQ}&rest=show'
             TotalArtistID = rget(url,
                 headers = self.DEFINED_HTTP_Headers, proxies = self.DEFINED_Proxy, timeout = 3).json()
-            
             if not TotalArtistID['body']['users']: break
-            
             for ID_Index in TotalArtistID['body']['users']:
                 print(f"\r>>>> 已获取{serialNumber:>4}个ID | 本轮用户数: {len(TotalArtistID['body']['users'])}", end='')
                 self.RESULTS_ArtistNameID[f'{serialNumber:0>4}'] = {
