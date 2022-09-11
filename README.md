@@ -7,7 +7,8 @@
 > 如果你不知道Cookie如何获取，请仔细<a href="#Cookie_Help">阅读文档</a>。
 
 > 此Pixiv代码库使用Python3进行开发，如果你的电脑没有Python3。<br>
-> 请访问此<a href="https://www.python.org/downloads">链接</a>进行下载并安装。
+> 请访问此<a href="https://www.python.org/downloads">链接</a>进行下载并安装。<br>
+> 请尽量使用版本号大于等于3.7.5的Python程序。
 
 > 本Pixiv代码库采用requests网络请求库<br>
 > 如果你的计算机中未安装此库请仔细<a href="#Requests_Help">阅读文档</a>。
