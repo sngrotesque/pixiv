@@ -7,9 +7,7 @@ class pixiv:
     HTTP_Cookie 是可选的，这个值为你自己的Pixiv Cookie数据。
     Proxy       是可选的，使用代理加VPN对Pixiv官网进行访问。
     """
-    def __init__(self,
-        YourOwnID :str, ArtistID :str = None, HTTP_Cookie :str = None, Proxy :dict = None
-        ):
+    def __init__(self, YourOwnID :str, ArtistID :str = None, HTTP_Cookie :str = None, Proxy :dict = None):
         self.DEFINED_YourID = YourOwnID
         self.DEFINED_ArtistID = ArtistID
         self.DEFINED_Cookie = HTTP_Cookie
