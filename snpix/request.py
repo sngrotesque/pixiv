@@ -20,7 +20,8 @@ class pixiv:
         self.DEFINED_UserAgent = 'Mozilla/5.0 (X11; Linux x86_64; rv:97.0) Gecko/20100101 Firefox/97.0'
         self.DEFINED_BQ = 24 # 基本量(Basic quantity)
         
-        self.RESULTS_AuthorNameID = {}
+        self.RESULTS_ArtistNameID = {}
+        self.RESULTS_
 
     @property
     def GetAllUsersID(self):
@@ -37,7 +38,7 @@ class pixiv:
             
             for ID_Index in TotalArtistID['body']['users']:
                 print(f"\r>>>> 已获取{serialNumber:>4}个ID | 本轮用户数: {len(TotalArtistID['body']['users'])}", end='')
-                self.RESULTS_AuthorNameID[f'{serialNumber:0>4}'] = {
+                self.RESULTS_ArtistNameID[f'{serialNumber:0>4}'] = {
                     "userId": ID_Index['userId'], "userName": ID_Index['userName']}
                 
                 serialNumber += 1
