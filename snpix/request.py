@@ -3,7 +3,7 @@ from .utils import *
 class pixiv:
     """
     YourOwnID是必须的，这个值代表你自己的PixivID，是网址栏的ID
-    ArtistID是可选，这个
+    ArtistID是可选，这个值代表想爬取的那个画师的ID。
     HTTP_Cookie是可选的，这个值为你自己的Pixiv Cookie数据。
     Proxy是可选的，使用代理加VPN对Pixiv官网进行访问。
     """
