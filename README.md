@@ -6,7 +6,8 @@
 > 不涉及任何登录操作，只要你拥有自己的Cookie，那么你就可以使用此程序。<br>
 > 如果你不知道Cookie如何获取，请仔细<a href="#Cookie_Help">阅读文档</a>。
 
-> 本Pixiv代码库采用requests网络请求库
+> 本Pixiv代码库采用requests网络请求库<br>
+> 如果你的计算机中未安装此库请仔细<a href="#Cookie_Help">阅读文档</a>。
 
 <span id="Cookie_Help">Cookie 帮助文档</span>
 ```text
