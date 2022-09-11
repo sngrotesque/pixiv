@@ -28,9 +28,9 @@ class pixiv:
         '''获取关注列表所有的用户ID与用户名称'''
         ForLoopMaxValue = self.DEFINED_BQ * 8192 + 1
         serialNumber = 1
+        HTTP_Headers = {"User-Agent": self.DEFINED_UserAgent, "Cookie": self.DEFINED_Cookie}
         
         for page in range(0, ForLoopMaxValue, self.DEFINED_BQ):
-            HTTP_Headers = {"User-Agent": self.DEFINED_UserAgent, "Cookie": self.DEFINED_Cookie}
             url = f'https://www.pixiv.net/ajax/user/{self.DEFINED_YourID}/following?offset={page}&limit={self.DEFINED_BQ}&rest=show'
             TotalArtistID = rget(url, headers = HTTP_Headers, proxies = self.DEFINED_Proxy, timeout = 3).json()
             
