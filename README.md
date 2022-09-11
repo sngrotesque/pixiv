@@ -6,7 +6,7 @@
 > 不涉及任何登录操作，只要你拥有自己的Cookie，那么你就可以使用此程序。<br>
 > 如果你不知道Cookie如何获取，请仔细<a href="#Cookie_Help">阅读文档</a>。
 
-> 此Pixiv代码库使用Python3进行开发，如果你的电脑没有Python3。
+> 此Pixiv代码库使用Python3进行开发，如果你的电脑没有Python3。<br>
 > 请访问此<a href="">链接</a>进行下载并安装。
 
 > 本Pixiv代码库采用requests网络请求库<br>
