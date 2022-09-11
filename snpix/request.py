@@ -62,6 +62,7 @@ class pixiv:
             for ArtworkID in ArtworkLinks['body']['illusts']:
                 print(f'>>>> {ArtworkID:>16}')
 
+                serialNumber += 1
 
 
 
