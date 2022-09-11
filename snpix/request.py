@@ -29,18 +29,19 @@ class pixiv:
         for page in range(0, ForLoopMaxValue, self.DEFINED_BQ):
             HTTP_Headers = {"User-Agent": self.DEFINED_UserAgent, "Cookie": self.DEFINED_Cookie}
             url = f'https://www.pixiv.net/ajax/user/{self.DEFINED_YourID}/following?offset={page}&limit={self.DEFINED_BQ}&rest=show'
-            TotalAuthorID = rget(url, headers = HTTP_Headers, proxies = self.DEFINED_Proxy, timeout = 3).json()
+            TotalArtistID = rget(url, headers = HTTP_Headers, proxies = self.DEFINED_Proxy, timeout = 3).json()
             
-            if not TotalAuthorID['body']['users']: break
+            if not TotalArtistID['body']['users']: break
             
-            for ID_Index in TotalAuthorID['body']['users']:
-                print(f"\r>>>> 已获取{serialNumber:>4}个ID | 本轮用户数: {len(TotalAuthorID['body']['users'])}", end='')
+            for ID_Index in TotalArtistID['body']['users']:
+                print(f"\r>>>> 已获取{serialNumber:>4}个ID | 本轮用户数: {len(TotalArtistID['body']['users'])}", end='')
                 self.RESULTS_AuthorNameID[f'{serialNumber:0>4}'] = {
                     "userId": ID_Index['userId'], "userName": ID_Index['userName']}
                 
                 serialNumber += 1
 
-
+    @property
+    def Get
 
 
 
