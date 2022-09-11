@@ -51,7 +51,7 @@ class pixiv:
     def GetAllArtistArtworks(self):
         self.GetAllUsersID
         
-        
+        https://www.pixiv.net/ajax/user/{UID}/profile/all?lang=en
 
 
 
