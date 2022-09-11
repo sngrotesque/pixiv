@@ -54,7 +54,7 @@ class pixiv:
         for index in self.RESULTS_ArtistNameID:
             uid = self.RESULTS_ArtistNameID[index]['userId']
             # url = f'https://www.pixiv.net/ajax/user/{uid}/profile/all?lang=en'
-            print(f'>>>> [{uid}]')
+            print(f'>>>> [{uid:>8}]')
 
 
 
