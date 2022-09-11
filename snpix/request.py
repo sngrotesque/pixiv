@@ -43,6 +43,8 @@ class pixiv:
                     "userId": ID_Index['userId'], "userName": ID_Index['userName']}
                 
                 serialNumber += 1
+        print("")
+
 
     @property
     def GetArtworksOfSingleArtist(self):
