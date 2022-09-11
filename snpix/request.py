@@ -27,7 +27,7 @@ class pixiv:
     def GetAllUsersNameID(self):
         '''获取关注列表所有的用户ID与用户名称'''
         ForLoopMaxValue = self.DEFINED_BQ * 8192 + 1 # 最大页数
-        serialNumber = 1
+        serialNumber = 1 # 序号
         
         for page in range(0, ForLoopMaxValue, self.DEFINED_BQ):
             url = f'https://www.pixiv.net/ajax/user/{self.DEFINED_YourID}/following?offset={page}&limit={self.DEFINED_BQ}&rest=show'
