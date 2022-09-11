@@ -24,7 +24,7 @@ class pixiv:
         self.RESULTS_ArtworkPictureLinks = {}
 
     @property
-    def GetAllUsersID(self):
+    def GetAllUsersNameID(self):
         '''获取关注列表所有的用户ID与用户名称'''
         ForLoopMaxValue = self.DEFINED_BQ * 8192 + 1
         serialNumber = 1
