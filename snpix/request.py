@@ -21,7 +21,7 @@ class pixiv:
         self.DEFINED_BQ = 24 # 基本量(Basic quantity)
         
         self.RESULTS_ArtistNameID = {}
-        self.RESULTS_
+        self.RESULTS_ArtistPictures = {}
 
     @property
     def GetAllUsersID(self):
