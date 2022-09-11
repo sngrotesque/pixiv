@@ -52,7 +52,7 @@ class pixiv:
         self.GetAllUsersID
         
         for index in self.RESULTS_ArtistNameID:
-            uid = 
+            uid = self.RESULTS_ArtistNameID[index]['userId']
             url = f'https://www.pixiv.net/ajax/user/{uid}/profile/all?lang=en'
             
 
