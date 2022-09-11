@@ -17,13 +17,7 @@ class pixiv:
 
     @property
     def GetAllUsersID(self):
-        '''
-        目前遇到的问题如下
-            1. 由于每页加载self.DEFINED_BQ个用户，导致如果用户总数无法整除for循环中page中的数时会无法获取到所有用户的ID
-        解决方案猜测
-            1. 将self.DEFINED_BQ设为1，每次只获取1个用户的ID，最后判断users中的列表以确认是否结束循环（但效率会很慢）
-            2. 保持现状，但通过users列表中的数据来决定如何处理总数据（可行性比较低）
-        '''
+        '''获取关注列表所有的用户ID与用户名称'''
         ForLoopMaxValue = self.DEFINED_BQ * 8192 + 1
         serialNumber = 1
         
