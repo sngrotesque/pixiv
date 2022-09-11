@@ -1,8 +1,5 @@
 from .utils import *
 
-def GetArtworksOfSingleArtist(self = None, ArtistID):
-    pass
-
 class pixiv:
     """
     YourOwnID是必须的，这个值代表你自己的PixivID，是网址栏的ID
