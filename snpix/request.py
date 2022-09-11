@@ -56,7 +56,7 @@ class pixiv:
             uid = self.RESULTS_ArtistNameID[index]['userId']
             url = f'https://www.pixiv.net/ajax/user/{uid}/profile/all?lang=en'
             ArtworkLinks = rget(url, headers = HTTP_Headers, proxies = self.DEFINED_Proxy, timeout = 3).json()
-
+            print(ArtworkLinks)
 
 
 
