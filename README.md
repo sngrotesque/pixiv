@@ -70,8 +70,8 @@
     如果正确进入Python的交互页面就代表可以正常使用Python。
     如果不行，请仔细检查上面的每一个步骤。
 
-3.  如果你需要更换Pip源，请阅读此<a href="https://blog.csdn.net/weixin_42640909/article/details/112142215">链接</a>
-
+3.  如果你需要更换Pip源，请阅读此链接：
+        https://blog.csdn.net/weixin_42640909/article/details/112142215
 ```
 
 <span id="Requests_Help">Requests 帮助文档</span>
