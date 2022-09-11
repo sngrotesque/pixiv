@@ -53,7 +53,9 @@
 
 <span id="Python_Help">Python 帮助文档</span>
 ```text
+通过链接安装完成Python之后，请按照以下的步骤设置环境变量。
 
+1. 
 ```
 
 
