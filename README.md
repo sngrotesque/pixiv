@@ -46,7 +46,11 @@
 
 <span id="Requests_Help">Requests 帮助文档</span>
 ```text
-Requests库是由
+Requests库是由Kenneth Reitz开发并维护的Python第三方库
+基于urllib3再次开发，许可证为Apache 2.0
+
+如果你需要安装此库请通过如下的指令进行安装
+    python(或python3) -m pip install requests
 ```
 
 
