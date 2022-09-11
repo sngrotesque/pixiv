@@ -8,6 +8,7 @@ class pixiv:
     """
     def __init__(self,
         YourOwnID :str,
+        ArtistID :str = None,
         HTTP_Cookie :str = None,
         Proxy :dict = None
         ):
