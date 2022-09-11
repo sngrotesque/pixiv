@@ -27,12 +27,11 @@ class pixiv:
     def GetAllUsersID(self):
         '''获取关注列表所有的用户ID与用户名称'''
         ForLoopMaxValue = self.DEFINED_BQ * 8192 + 1
-        HTTP_Headers = {"User-Agent": self.DEFINED_UserAgent, "Cookie": self.DEFINED_Cookie}
         serialNumber = 1
         
         for page in range(0, ForLoopMaxValue, self.DEFINED_BQ):
             url = f'https://www.pixiv.net/ajax/user/{self.DEFINED_YourID}/following?offset={page}&limit={self.DEFINED_BQ}&rest=show'
-            TotalArtistID = rget(url, headers = HTTP_Headers, proxies = self.DEFINED_Proxy, timeout = 3).json()
+            TotalArtistID = rget(url, headers = self.DEFINED_HTTP_Headers, proxies = self.DEFINED_Proxy, timeout = 3).json()
             
             if not TotalArtistID['body']['users']: break
             
@@ -52,13 +51,13 @@ class pixiv:
     @property
     def GetAllArtistArtworks(self):
         self.GetAllUsersID
-        HTTP_Headers = {"User-Agent": self.DEFINED_UserAgent, "Cookie": self.DEFINED_Cookie}
         serialNumber = 1
         
         for index in self.RESULTS_ArtistNameID:
             uid = self.RESULTS_ArtistNameID[index]['userId']
             url = f'https://www.pixiv.net/ajax/user/{uid}/profile/all?lang=en'
-            ArtworkLinks = rget(url, headers = HTTP_Headers, proxies = self.DEFINED_Proxy, timeout = 3).json()
+            ArtworkLinks = rget(url,
+                headers = self.DEFINED_HTTP_Headers, proxies = self.DEFINED_Proxy, timeout = 3).json()
             for ArtworkID in ArtworkLinks['body']['illusts']:
                 # print(f'\r>>>> {serialNumber:0>5} | {ArtworkID:>12}', end='')
                 print(f'\r>>>> {serialNumber} {uid}', end='')
