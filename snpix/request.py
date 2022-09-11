@@ -30,7 +30,7 @@ class pixiv:
         serialNumber = 1 # 序号
         
         for page in range(0, ForLoopMaxValue, self.DEFINED_BQ):
-            # 单页关注用户的链接
+            # 单页关注用户的链接，每页最多显示self.DEFINED_BQ个用户
             url = f'https://www.pixiv.net/ajax/user/{self.DEFINED_YourID}/following?offset={page}&limit={self.DEFINED_BQ}&rest=show'
             TotalArtistID = rget(url,
                 headers = self.DEFINED_HTTP_Headers, proxies = self.DEFINED_Proxy, timeout = 3).json()
