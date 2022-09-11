@@ -1,6 +1,7 @@
 from .utils import *
 
-def Get the work of a single artist
+def GetArtworksOfSingleArtist():
+    
 
 class pixiv:
     """
