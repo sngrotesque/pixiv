@@ -31,7 +31,8 @@ class pixiv:
         
         for page in range(0, ForLoopMaxValue, self.DEFINED_BQ):
             url = f'https://www.pixiv.net/ajax/user/{self.DEFINED_YourID}/following?offset={page}&limit={self.DEFINED_BQ}&rest=show'
-            TotalArtistID = rget(url, headers = self.DEFINED_HTTP_Headers, proxies = self.DEFINED_Proxy, timeout = 3).json()
+            TotalArtistID = rget(url,
+                headers = self.DEFINED_HTTP_Headers, proxies = self.DEFINED_Proxy, timeout = 3).json()
             
             if not TotalArtistID['body']['users']: break
             
