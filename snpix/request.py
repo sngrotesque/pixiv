@@ -62,7 +62,7 @@ class pixiv:
             ArtworkLinks = rget(url, headers = HTTP_Headers, proxies = self.DEFINED_Proxy, timeout = 3).json()
             for ArtworkID in ArtworkLinks['body']['illusts']:
                 # print(f'\r>>>> {serialNumber:0>5} | {ArtworkID:>12}', end='')
-                print(f'\r>>>> {serialNumber} {uid}')
+                print(f'\r>>>> {serialNumber} {uid}', end='')
 
                 serialNumber += 1
 
