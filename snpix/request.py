@@ -1,5 +1,28 @@
 from .utils import *
 
+def Pixiv_img_preview(url :str):
+    UserAgent = 'Mozilla/5.0 (X11; Linux x86_64; rv:97.0) Gecko/20100101 Firefox/97.0'
+    ProxyInfo = {"http": "http://127.0.0.1:1080", "https": "http://127.0.0.1:1080"}
+    BasicReferer = 'https://www.pixiv.net/'
+    
+    fileName = re.findall( # 为文件命名
+        r'\w+://[a-zA-Z0-9.\-\_]+/[a-zA-Z\-\_]+/img/'
+        r'([0-9a-zA-Z./\_]+)', url, re.S | re.I)[0]
+    fileName = fileName.replace('/', '_')
+    fileName = f'000_{fileName}'
+    
+    imgData = rget(url, headers = { # 获取数据
+        'user-agent': UserAgent, 'Referer': BasicReferer},
+        proxies = ProxyInfo).content
+    fwrite(fileName, imgData)
+    
+    try:
+        img = cv2.imread(fileName)
+        cv2.imshow('1', img)
+        cv2.waitKey(0)
+    except cv2.error:
+        print(f'非图片文件，不采取查看的操作。\nfileName: {fileName}')
+
 class pixiv:
     """
     YourOwnID   是必须的，这个值代表你自己的PixivID，是网址栏的ID
@@ -42,10 +65,6 @@ class pixiv:
                     "userName": ID_Index['userName']}
                 serialNumber += 1
         print("")
-
-    @property
-    def GetArtworksOfSingleArtist(self):
-        pass
 
     @property
     def GetAllArtistArtworks(self):

@@ -8,6 +8,7 @@ from lxml import etree
 from time import sleep
 from os import mkdir
 import re
+import cv2
 
 def sha256(content):
     a = Hashlib_SHA256()
