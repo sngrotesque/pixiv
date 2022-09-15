@@ -1,14 +1,6 @@
 from snpix.utils import *
 import snpix
 
-SNGrotesqueID = '38279179'
-Cookie = fread('000_cookie.txt').decode()
-Proxy = {'http': 'http://127.0.0.1:1080','https': 'http://127.0.0.1:1080'}
-
-res = snpix.pixiv(SNGrotesqueID, HTTP_Cookie=Cookie, Proxy = Proxy)
-res.GetAllUsersNameID
-
-with open('000_ALL_Pixiv_Follow_list_new.json', 'w', encoding='utf-8') as f:
-    f.write(jdump(res.RESULTS_ArtistNameID, ensure_ascii=False))
-
+url = 'https://i.pximg.net/img-zip-ugoira/img/2022/07/28/17/54/33/100055388_ugoira600x600.zip'
+snpix.Pixiv_img_preview(url, '000_PixivPreview', OpenTheFile = True)
 

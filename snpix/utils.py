@@ -4,11 +4,12 @@ from hashlib import sha256 as Hashlib_SHA256
 from random import uniform as rand_float
 from os.path import exists, isfile
 from threading import Thread
+from time import sleep, time
 from lxml import etree
-from time import sleep
 from os import mkdir
-import re
+import ctypes
 import cv2
+import re
 
 def sha256(content):
     a = Hashlib_SHA256()

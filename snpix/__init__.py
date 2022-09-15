@@ -1,4 +1,4 @@
-from .request import pixiv
+from .request import pixiv, Pixiv_img_preview
 
 
 
