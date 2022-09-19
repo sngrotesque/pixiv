@@ -1,82 +1,65 @@
 from .utils import *
 
-def Pixiv_img_preview(url :str, DirectoryName :str, OpenTheFile :bool = False):
-    UserAgent = 'Mozilla/5.0 (X11; Linux x86_64; rv:97.0) Gecko/20100101 Firefox/97.0'
-    ProxyInfo = {"http": "http://127.0.0.1:1080", "https": "http://127.0.0.1:1080"}
-    BasicReferer = 'https://www.pixiv.net/'
-    
-    print(f'>>>> 检查{DirectoryName}目录...')
-    if not exists(DirectoryName):
-        print(f'>>>> 不存在{DirectoryName}目录，创建.')
-        mkdir(DirectoryName)
-    
-    print(f'>>>> 为文件创建名称.')
-    fileName = re.findall( # 为文件命名
-        r'\w+://[a-zA-Z0-9.\-\_]+/[a-zA-Z\-\_]+/img/'
-        r'([0-9a-zA-Z./\_]+)', url, re.S | re.I)[0]
-    fileName = fileName.replace('/', '_')
-    fileName = f'000_{fileName}'
-    fileName = f'{DirectoryName}/{fileName}'
-    
-    print(f'>>>> 获取文件数据.')
-    imgData = rget(url, headers = {'user-agent': UserAgent, 'Referer': BasicReferer},
-        proxies = ProxyInfo).content
-    print(f'>>>> 保存至文件: {fileName}')
-    fwrite(fileName, imgData)
-    
-    try:
-        print(f'>>>> 预览文件.')
-        img = cv2.imread(fileName)
-        cv2.imshow(DirectoryName, img)
-        cv2.waitKey(0)
-    except cv2.error:
-        print(f'>>>> 非图片文件，不采取预览的操作。\n>>>> fileName: {fileName}')
-        if OpenTheFile:
-            ctypes.windll.shell32.ShellExecuteW(None, 'open', fileName.replace('/','\\'), None, None, 1)
-
 class pixiv:
-    """
-    ArtistID    是可选，这个值代表想爬取的那个画师的ID。
-    HTTP_Cookie 是可选的，这个值为你自己的Pixiv Cookie数据。
-    Proxy       是可选的，使用代理加VPN对Pixiv官网进行访问。
-    """
-    def __init__(self, ArtistID :str = None, HTTP_Cookie :str = None, Proxy :dict = None):
-        self.DEFINED_ArtistID = ArtistID
-        self.DEFINED_Cookie = HTTP_Cookie
-        self.DEFINED_Proxy = Proxy
-        
-        self.DEFINED_UserAgent = 'Mozilla/5.0 (X11; Linux x86_64; rv:97.0) Gecko/20100101 Firefox/97.0'
-        self.DEFINED_BQ = 24 # 基本量(Basic quantity)
-        self.DEFINED_HTTP_Headers = {
-            "User-Agent": self.DEFINED_UserAgent,
-            "Cookie": self.DEFINED_Cookie}
-        
-        self.RESULTS_ArtistNameID = {}
-        self.RESULTS_ArtistArtworks = {}
-        self.RESULTS_ArtworkPictureLinks = {}
+    def __init__(self, HTTP_Cookie :str, ArtistID :int = None, Proxy :dict = None):
+        self.DEFINED_Cookie   = HTTP_Cookie # 你在Pixiv网站上的Cookie
+        self.DEFINED_ArtistID = ArtistID    # 某位画师的用户ID
+        self.DEFINED_Proxy    = Proxy       # 代理服务器
+        self.DEFINED_Headers  = {"User-Agent": UserAgent, "Cookie": self.DEFINED_Cookie}
+        self.RESULTS_ArtistInfo   = {} # Json数据，用来存放关注列表中所有用户的ID和名字
+        self.RESULTS_ArtworkLinks = [] # List数据，用来存放某位画师所有的插画作品链接
+        self.RESULTS_PictureLinks = [] # List数据，用来存放某个作品链接中的所有图片链接
 
-    def GetAllUsersNameID(self, YourOwnID :str):
-        '''YourOwnID   是必须的，这个值代表你自己的PixivID，是网址栏的ID
-        获取关注列表所有的用户ID与用户名称'''
-        ForLoopMaxValue = self.DEFINED_BQ * 8192 + 1 # 最大页数
-        serialNumber = 1 # 序号
-        
-        for page in range(0, ForLoopMaxValue, self.DEFINED_BQ):
-            # 单页关注用户的链接，每页最多显示self.DEFINED_BQ个用户
-            url = f'https://www.pixiv.net/ajax/user/{YourOwnID}/following?offset={page}&limit={self.DEFINED_BQ}&rest=show'
-            TotalArtistID = rget(url,
-                headers = self.DEFINED_HTTP_Headers, proxies = self.DEFINED_Proxy, timeout = 3).json()
-            if not TotalArtistID['body']['users']: break # 如果获取的用户列表为空就终止循环
-            for ID_Index in TotalArtistID['body']['users']:
-                print(f"\r>>>> 已获取{serialNumber:>4}个ID | 本轮用户数: {len(TotalArtistID['body']['users'])}", end='')
-                self.RESULTS_ArtistNameID[f'{serialNumber:0>4}'] = {
-                    "userId": f'https://www.pixiv.net/users/{ID_Index["userId"]}',
-                    "userName": ID_Index['userName']}
+    def GetAllArtistInfo(self, YourOwnID :int):
+        serialNumber = 1
+        for page in range(0, 196609, 24):
+            url = f'https://www.pixiv.net/ajax/user/{YourOwnID}/following?offset={page}&limit=24&rest=show'
+            TotalArtistID = rget(url, headers = self.DEFINED_Headers, proxies = self.DEFINED_Proxy).json()
+            if not TotalArtistID['body']['users']: print('\n>>>> Done.'); break
+            
+            for index in TotalArtistID['body']['users']:
+                print(f"\r>>>> 已获取{CYAN}{serialNumber:>4}{RESET}个ID", end='')
+                self.RESULTS_ArtistInfo[f'{serialNumber:0>4}'] = {
+                    "ArtistUrl": f'https://www.pixiv.net/users/{index["userId"]}',
+                    "userName" : index['userName']}
                 serialNumber += 1
-        print("")
 
+    @property
+    def GetTotalArtworksLink(self):
+        url = f'https://www.pixiv.net/ajax/user/{self.DEFINED_ArtistID}/profile/all?lang=zh'
+        TotalArtworks = rget(url, headers = self.DEFINED_Headers, proxies = self.DEFINED_Proxy).json()
+        TotalArtworks= list(TotalArtworks['body']['illusts'].keys())
+        serialNumber = 1
+        for artworkID in TotalArtworks:
+            self.RESULTS_ArtworkLinks.append(f'https://www.pixiv.net/artworks/{artworkID}')
+            print(f'\r>>>> {CYAN}{serialNumber:>4}{RESET} Get artwork ID: {artworkID:>8}', end='')
+            serialNumber += 1
+        print('\n>>>> Done.')
 
+    def GetPictureLink(self, ArtworkUrl :str):
+        artworkID = re.findall(r'https://www.pixiv.net/artworks/(\d+)', ArtworkUrl, re.S)[0]
+        ArtkworkJson = rget(f'https://www.pixiv.net/ajax/illust/{artworkID}/pages?lang=zh',
+            headers = self.DEFINED_Headers, proxies = self.DEFINED_Proxy).json()
+        for index in ArtkworkJson['body']:
+            self.RESULTS_PictureLinks.append(index['urls']['original'])
 
+    def DownloadPictures(self, PictureLink :str, DirectoryName :str):
+        if not exists(DirectoryName): mkdir(DirectoryName)
+        PictureFileName = re.findall(
+        r'\w+://[a-zA-Z0-9.\-\_]+/[a-zA-Z\-\_]+/img/'
+        r'([0-9a-zA-Z./\_]+)', PictureLink, re.S | re.I)[0]
+        PictureFileName = PictureFileName.replace('/', '_')
+        PictureFileName = f'{DirectoryName}/{PictureFileName}'
+        if exists(PictureFileName):
+            print(f'>>>> 已存在{PictureFileName}, 跳过...')
+            return
+        
+        self.DEFINED_Headers['Referer'] = 'https://www.pixiv.net/'
+        pictureData = rget(PictureLink, headers = self.DEFINED_Headers,
+            proxies = self.DEFINED_Proxy).content
+        
+        print(f'>>>> ')
+        fwrite(PictureFileName, pictureData)
 
 
 
