@@ -1,9 +1,8 @@
 from .utils import *
 
 class pixiv:
-    def __init__(self, HTTP_Cookie :str, ArtistID :int = None, Proxy :dict = None):
+    def __init__(self, HTTP_Cookie :str, Proxy :dict = None):
         self.DEFINED_Cookie   = HTTP_Cookie # 你在Pixiv网站上的Cookie
-        self.DEFINED_ArtistID = ArtistID    # 某位画师的用户ID
         self.DEFINED_Proxy    = Proxy       # 代理服务器
         self.DEFINED_Headers  = {"User-Agent": UserAgent, "Cookie": self.DEFINED_Cookie}
         self.RESULTS_ArtistInfo   = {} # Json数据，用来存放关注列表中所有用户的ID和名字
@@ -24,9 +23,8 @@ class pixiv:
                     "userName" : index['userName']}
                 serialNumber += 1
 
-    @property
-    def GetTotalArtworksLink(self):
-        url = f'https://www.pixiv.net/ajax/user/{self.DEFINED_ArtistID}/profile/all?lang=zh'
+    def GetTotalArtworksLink(self, ArtistID :int):
+        url = f'https://www.pixiv.net/ajax/user/{ArtistID}/profile/all?lang=zh'
         TotalArtworks = rget(url, headers = self.DEFINED_Headers, proxies = self.DEFINED_Proxy).json()
         TotalArtworks= list(TotalArtworks['body']['illusts'].keys())
         serialNumber = 1
