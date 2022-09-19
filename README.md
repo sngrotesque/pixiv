@@ -8,7 +8,7 @@
 
 > 此Pixiv代码库使用Python3进行开发，如果你的电脑没有Python3。<br>
 > 请访问此<a href="https://www.python.org/downloads">链接</a>进行下载并安装。<br>
-> 请尽量使用版本号大于等于3.7.5的Python程序。<br>
+> 请使用版本号大于等于<kbd>3.7.5</kbd>的Python程序。<br>
 > 安装完毕之后请在你的计算机中设置环境变量以确保你可以正常使用Python。<br>
 > 请仔细<a href="#Python_Help">阅读文档</a>。
 
