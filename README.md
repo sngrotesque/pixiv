@@ -2,6 +2,9 @@
 
 > 由SN-Grotesque开发并维护
 
+> 关于此代码的开发和维护：<br>
+> 请你仔细<a href="#DM_Document">阅读文档</a>
+
 > 主要采用Cookie对Pixiv网站进行爬取。<br>
 > 不涉及任何登录操作，只要你拥有自己的Cookie，那么你就可以使用此程序。<br>
 > 如果你不知道Cookie如何获取，请仔细<a href="#Cookie_Help">阅读文档</a>。
@@ -15,6 +18,25 @@
 > 本Pixiv代码库采用的第三方库名如下<br>
 > requests, lxml<br>
 > 如果你的计算机中未安装这些库请仔细<a href="#Requests_Help">阅读文档</a>。
+
+<span id="DM_Document">开发和维护文档</span>
+```text
+初始化类中的变量名有前缀
+    DEFINED 表示此变量作为参数使用或初始定义
+    RESULTS 表示此变量作为结果保存
+
+在类方法中
+    GetArtistInfo       作用是获取指定ID的关注列表所有用户的ID和名字
+        传入一个参数，参数类型可以是str或int，最好是你自己的ID
+        返回值          None
+        结果保存至      self.RESULTS_ArtistInfo
+    
+    GetArtworks         作用是获取指定用户的所有作品链接
+        传入一个参数，参数类型可以是str或int，为作者ID
+        返回值          None
+        结果保存至      self.RESULTS_ArtworkLinks
+                        self.RESULTS_PictureLinks
+```
 
 <span id="Cookie_Help">Cookie 帮助文档</span>
 ```text
@@ -52,6 +74,7 @@
 ```
 
 <span id="Python_Help">Python 帮助文档</span>
+
 ```text
 通过链接安装完成Python之后，请按照以下的步骤设置环境变量。
 此处使用Windows 10 21H2版本演示。
@@ -84,13 +107,3 @@ Lxml库是一个用于解析Web页面的库
 如果你需要安装此库请通过如下的指令进行安装
     python(或python3) -m pip install requests lxml
 ```
-
-
-
-
-
-
-
-
-
-
