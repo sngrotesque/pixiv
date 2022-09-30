@@ -47,7 +47,7 @@ class pixiv:
         
         def _getartwork(threadNumber):
             for ID in range(threadNumber, len(artworksIDList), self.totalNumberOfThreads):
-                print(f'>>>>  Thread {threadNumber:0>2}: 正在获取下载链接.')
+                print(f'>>>> Thread {threadNumber:0>2}: 正在获取下载链接.')
                 dynamicGraphList  = requestGET(self,
                     f'https://www.pixiv.net/ajax/illust/{artworksIDList[ID]}/ugoira_meta?lang=zh').json()['body']
                 staticDiagramList = requestGET(self,

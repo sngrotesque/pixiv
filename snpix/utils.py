@@ -94,7 +94,7 @@ def SetFileName(url :str):
     return fileName
 
 # 一堆jpg转gif
-def jpg2mp4(in_path :List[str], out_path :str, fps :int = 24):
+def jpg2mp4(in_path :List[str], out_path :str, fps :int = 15):
     img_array = []
     for filename in in_path:
         img = cv2.imread(filename)
