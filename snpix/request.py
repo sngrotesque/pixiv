@@ -64,7 +64,7 @@ class pixiv:
         def _download(threadNumber):
             for artworkIndex in range(threadNumber, len(artworkUrl), self.totalNumberOfThreads):
                 fileArchivePath = f'{folder}/{SetFileName(artworkUrl[artworkIndex])}'
-                if exists(fileArchivePath):
+                if exists(fileArchivePath) or exists(fileArchivePath.replace('zip', 'mp4')):
                     print(f'>>>> {fileArchivePath}已存在，跳过...')
                     continue
                 artworkContent = requestGET(self, artworkUrl[artworkIndex])
