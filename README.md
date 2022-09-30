@@ -31,11 +31,19 @@
         返回值          None
         结果保存至      self.RESULTS_ArtistInfo
     
-    GetArtworks         作用是获取指定用户的所有作品链接
+    MultiThreadGetArtworks  作用是获取指定用户的所有作品链接
         传入一个参数，参数类型可以是str或int，为作者ID
-        返回值          None
-        结果保存至      self.RESULTS_ArtworkLinks
-                        self.RESULTS_PictureLinks
+        返回值              None
+        结果保存至          self.RESULTS_ArtworkLinks
+                            self.RESULTS_PictureLinks
+    
+    MultiThreadDownloadArtwork  作用是下载列表中的作品至指定目录
+        传入三个参数
+                                artworkUrl 类型为List[str]
+                                folder     类型为str
+                                zipToMp4   类型为bool（可选参数，默认为True）
+        返回值                  None
+        无结果
 ```
 
 <span id="Cookie_Help">Cookie 帮助文档</span>
