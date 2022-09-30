@@ -15,14 +15,12 @@ pixiv = snpix.pixiv(HTTP_Cookie=Cookie,  Proxy = Proxy)
 pixiv.GetAllArtistInfo(YouOwnID) # 通过你自己的ID来获取关注列表中的所有用户ID和名字
 pixiv.RESULTS_ArtistInfo         # 结果保存在此处
 
-pixiv.GetTotalArtworksLink(ArtistID) # 通过PixivAPI获取指定画师的所有插画作品链接
-pixiv.RESULTS_ArtworkLinks           # 结果保存在此处
+pixiv.GetArtworks(ArtistID) # 获取指定用户的所有作品页与作品中所有图片的下载链接
+pixiv.RESULTS_ArtworkLinks  # 所有作品页保存在此处
+pixiv.RESULTS_PictureLinks  # 所有图片的下载链接保存在此处
 
-artworkUrl = 'https://www.pixiv.net/artworks/99901109'
-pixiv.GetPictureLink(artworkUrl) # 通过PixivAPI获取单个作品中所有的图片链接
-pixiv.RESULTS_PictureLinks       # 结果保存在此处
+url = ['https://www.pixiv.net/artworks/00000000',
+'https://www.pixiv.net/artworks/00000000', 'https://www.pixiv.net/artworks/00000000']
+folder = 'd:/123123'
 
-PictureUrl = 'https://i.pximg.net/img-original/img/2022/07/22/06/21/36/99901109_p0.jpg'
-DirectoryName = 'pixiv_picture'
-pixiv.DownloadPictures(PictureUrl, DirectoryName)
-# 通过图片的源链接下载原图
+pixiv.DownloadArtwork(url, folder) # 将作品列表分别下载保存至指定文件夹

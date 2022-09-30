@@ -1,16 +1,17 @@
 from hashlib  import sha256 as Hashlib_SHA256
 from requests import get    as rget
 from json     import dumps  as jdump
+from zipfile  import ZipFile
 from os.path  import exists
-from lxml     import etree
-from os       import mkdir
+from os       import mkdir, remove, rmdir
+from typing   import Union, List
 
-import ctypes, cv2, re, threading, os
+import ctypes, cv2, re, threading
 
 # 终端输出颜色
-BLACK,  RED,   GREEN    = "\x1b[90m", "\x1b[91m", "\x1b[92m"
-YELLOW, BLUE,  MAGENTA  = "\x1b[93m", "\x1b[94m", "\x1b[95m"
-CYAN,   WHITE, RESET    = "\x1b[96m", "\x1b[97m", "\x1b[0m"
+BLACK, RED,   GREEN    = "\x1b[90m", "\x1b[91m", "\x1b[92m"
+GOLD,  BLUE,  MAGENTA  = "\x1b[93m", "\x1b[94m", "\x1b[95m"
+CYAN,  WHITE, RESET    = "\x1b[96m", "\x1b[97m", "\x1b[0m"
 
 # 宏定义
 UserAgent = 'Mozilla/5.0 (X11; Linux x86_64; rv:97.0) Gecko/20100101 Firefox/97.0'
@@ -23,7 +24,7 @@ def PixivPreview(url :str, DirectoryName :str, OpenTheFile :bool = True):
     print(f'>>>> 检查{DirectoryName}目录...')
     if not exists(DirectoryName):
         print(f'>>>> 不存在{DirectoryName}目录，创建.')
-        os.mkdir(DirectoryName)
+        mkdir(DirectoryName)
     
     print(f'>>>> 为文件创建名称.')
     fileName = re.findall( # 为文件命名
@@ -79,13 +80,60 @@ def filecmp(fn_1 :str, fn_2 :str):
 def jdumps(data :dict):
     return jdump(data, ensure_ascii=False)
 
-# 显示图片的各种大小(Bytes, Kb, Mb)
-def PictureSizeView(name :str, n :int):
-    Kb = n/1024; Mb = n/1024**2
-    print(f'>>>> {name} Picture Info.\n>>>> {n} Bytes, {Kb:.2f} Kb, {Mb:.2f} Mb.\n')
+# 判断目录是否存在，不存在就创建
+def CheckDirectory(name):
+    if not exists(name):
+        mkdir(name)
+
+# 用Pixiv的下载链接命名文件
+def SetFileName(url :str):
+    fileName = re.findall( # 为文件命名
+        r'\w+://[a-zA-Z0-9.\-\_]+/[a-zA-Z\-\_]+/img/'
+        r'([0-9a-zA-Z./\_]+)', url, re.S | re.I)[0]
+    fileName = fileName.replace('/', '_')
+    return fileName
+
+# 一堆jpg转gif
+def jpg2mp4(in_path :List[str], out_path :str, fps :int = 24):
+    img_array = []
+    for filename in in_path:
+        img = cv2.imread(filename)
+        height, width, layers = img.shape
+        size = (width, height)
+        img_array.append(img)
+    out = cv2.VideoWriter(out_path, cv2.VideoWriter_fourcc(*'DIVX'), fps, size)
+    for i in range(len(img_array)):
+        out.write(img_array[i])
+    out.release()
+
+def zipProcess(link, fileArchivePath :str, content :ZipFile, folder :str):
+    fwrite(fileArchivePath, content)
+    zipData = ZipFile(fileArchivePath, 'r')
+    zipName = zipData.namelist()
+
+    jpgToGifTempArchivePath = f'{fileArchivePath}_temp/'
+    if not exists(jpgToGifTempArchivePath):
+        mkdir(jpgToGifTempArchivePath)
+    zipData.extractall(jpgToGifTempArchivePath)
+    zipData.close()
+    
+    jpgPath = [f'{jpgToGifTempArchivePath}/{fn}' for fn in zipName]
+    gifFileName = SetFileName(link).replace('zip', 'mp4')
+    
+    jpg2mp4(jpgPath, f'{folder}/{gifFileName}')
+    for fn in jpgPath:
+        remove(fn)
+    remove(fileArchivePath)
+    rmdir(jpgToGifTempArchivePath)
+
+def executeMultithreading(function :object, totalNumberOfThreads):
+    TotalThread = [threading.Thread(target = function, args = (threadNumber, ))
+        for threadNumber in range(totalNumberOfThreads)]
+    for singleThread in TotalThread: singleThread.start()
+    for singleThread in TotalThread: singleThread.join()
 
 # # 随机休眠时间
 # from random import uniform
-# from time import sleep
+# from time   import sleep
 # def timeSleep(min_value :float = 0, max_value :float = None):
 #     sleep(rand_float(min_value, max_value))
