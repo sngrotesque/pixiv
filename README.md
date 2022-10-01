@@ -109,7 +109,7 @@
 Requests库用作爬取指定URL的内容
 cv2是一个图像处理库，用作jpg转MP4
     关于为什么不是转gif，原因如下
-    在同帧率同时长的情况下，Gif比MP4更占用空间，并且表现页不如MP4
+    在同帧率同时长的情况下，Gif比MP4更占用空间，并且表现也不如MP4
 
 如果你需要安装此库请通过如下的指令进行安装
     python -m pip install requests opencv-python
