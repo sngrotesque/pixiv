@@ -15,8 +15,7 @@
 > 安装完毕之后请在你的计算机中设置环境变量以确保你可以正常使用Python。<br>
 > 请仔细<a href="#Python_Help">阅读文档</a>。
 
-> 本Pixiv代码库采用的第三方库名如下<br>
-> requests, lxml<br>
+> 本Pixiv库采用了部分Python第三方库。<br>
 > 如果你的计算机中未安装这些库请仔细<a href="#Modules_Help">阅读文档</a>。
 
 <span id="DM_Document">开发和维护文档</span>
