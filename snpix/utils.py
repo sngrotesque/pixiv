@@ -1,17 +1,13 @@
-from hashlib  import sha256 as Hashlib_SHA256
-from requests import get    as rget
-from json     import dumps  as jdump
+from requests import get as rget
+from json     import dumps
 from zipfile  import ZipFile
 from os.path  import exists
 from os       import mkdir, remove, rmdir
 from typing   import Union, List
-
 import ctypes, cv2, re, threading
 
 # 终端输出颜色
-BLACK, RED,   GREEN    = "\x1b[90m", "\x1b[91m", "\x1b[92m"
-GOLD,  BLUE,  MAGENTA  = "\x1b[93m", "\x1b[94m", "\x1b[95m"
-CYAN,  WHITE, RESET    = "\x1b[96m", "\x1b[97m", "\x1b[0m"
+GOLD, CYAN, RESET = "\x1b[93m", "\x1b[96m", "\x1b[0m"
 
 # 宏定义
 UserAgent = 'Mozilla/5.0 (X11; Linux x86_64; rv:97.0) Gecko/20100101 Firefox/97.0'
@@ -50,12 +46,6 @@ def PixivPreview(url :str, DirectoryName :str, OpenTheFile :bool = True):
             print(f'>>>> 非图片文件，不采取预览的操作。\n>>>> fileName: {fileName}')
             ctypes.windll.shell32.ShellExecuteW(None, 'open', fileName.replace('/','\\'), None, None, 1)
 
-# 获取数据的SHA-256哈希值
-def sha256(content :object):
-    a = Hashlib_SHA256()
-    a.update(content)
-    return a.hexdigest()
-
 # 以二进制格式写入文件
 def fwrite(filePath :str, fileData :bytes):
     with open(filePath, 'wb') as f:
@@ -70,15 +60,9 @@ def fread(filePath :str):
 def fwriteJson(filePath :str, fileData :bytes):
     fwrite(filePath, jdumps(fileData).encode())
 
-# 通过SHA-256值比较两个文件
-def filecmp(fn_1 :str, fn_2 :str):
-    with open(fn_1, 'rb') as f: data_1 = f.read()
-    with open(fn_2, 'rb') as f: data_2 = f.read()
-    return sha256(data_1) == sha256(data_2)
-
 # 将dict类型变量转存为str类型(不对数据转码)
 def jdumps(data :dict):
-    return jdump(data, ensure_ascii=False)
+    return dumps(data, ensure_ascii=False)
 
 # 判断目录是否存在，不存在就创建
 def CheckDirectory(name):
@@ -106,7 +90,7 @@ def jpg2mp4(in_path :List[str], out_path :str, fps :int = 15):
         out.write(img_array[i])
     out.release()
 
-def zipProcess(link, fileArchivePath :str, content :ZipFile, folder :str):
+def zipProcess(link, fileArchivePath :str, content :Union[ZipFile, bytes], folder :str):
     fwrite(fileArchivePath, content)
     zipData = ZipFile(fileArchivePath, 'r')
     zipName = zipData.namelist()
@@ -126,14 +110,8 @@ def zipProcess(link, fileArchivePath :str, content :ZipFile, folder :str):
     remove(fileArchivePath)
     rmdir(jpgToGifTempArchivePath)
 
-def executeMultithreading(function :object, totalNumberOfThreads):
+def executeMultithreading(function :object, totalNumberOfThreads :int):
     TotalThread = [threading.Thread(target = function, args = (threadNumber, ))
         for threadNumber in range(totalNumberOfThreads)]
     for singleThread in TotalThread: singleThread.start()
     for singleThread in TotalThread: singleThread.join()
-
-# # 随机休眠时间
-# from random import uniform
-# from time   import sleep
-# def timeSleep(min_value :float = 0, max_value :float = None):
-#     sleep(rand_float(min_value, max_value))

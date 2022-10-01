@@ -1,13 +1,13 @@
 from snpix.utils import *
 import snpix
 
-# 000000 进度已完成
+# 524346 进度已完成
 
 cookie = fread('000_cookie.txt').decode()
 ProxyInfo = {"http": "http://127.0.0.1:1080", "https": "http://127.0.0.1:1080"}
 
 def single():
-    artistID = ''
+    artistID = '524346'
     path = f'p:/Pixiv/{artistID}'
 
     pixiv = snpix.pixiv(HTTP_Cookie=cookie, Proxy=ProxyInfo)

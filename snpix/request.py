@@ -25,8 +25,7 @@ class pixiv:
                 f'https://www.pixiv.net/ajax/user/{YourOwnID}/following?offset={page}&limit=24&rest=show'
             TotalArtistID = requestGET(self, getTotalArtistAPI).json()
             if not TotalArtistID['body']['users']:
-                print('\n>>>> Done.')
-                break
+                print('>>>> Done.'); break
             
             for index in TotalArtistID['body']['users']:
                 print(f">>>> 已获取{CYAN}{serialNumber:>4}{RESET}个ID")
@@ -56,7 +55,6 @@ class pixiv:
                 else:
                     for index in staticDiagramList: self.RESULTS_PictureLinks.append(index['urls']['original'])
         executeMultithreading(_getartwork, self.totalNumberOfThreads)
-        
         print(f">>>> 已获取{CYAN}{len(self.RESULTS_PictureLinks):>4}{RESET}个作品下载链接.")
 
     def MultiThreadDownloadArtwork(self, artworkUrl :List[str], folder :str, zipToMp4 :bool = True):

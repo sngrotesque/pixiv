@@ -17,7 +17,7 @@
 
 > 本Pixiv代码库采用的第三方库名如下<br>
 > requests, lxml<br>
-> 如果你的计算机中未安装这些库请仔细<a href="#Requests_Help">阅读文档</a>。
+> 如果你的计算机中未安装这些库请仔细<a href="#Modules_Help">阅读文档</a>。
 
 <span id="DM_Document">开发和维护文档</span>
 ```text
@@ -105,13 +105,11 @@
         https://blog.csdn.net/weixin_42640909/article/details/112142215
 ```
 
-<span id="Requests_Help">Requests 帮助文档</span>
+<span id="Modules_Help">模块帮助文档</span>
 ```text
-Requests库是由Kenneth Reitz开发并维护的Python第三方库
-基于urllib3再次开发，许可证为Apache 2.0
-
-Lxml库是一个用于解析Web页面的库
+Requests库用作爬取指定URL的内容
+cv2是一个图像处理库，用作jpg转MP4
 
 如果你需要安装此库请通过如下的指令进行安装
-    python(或python3) -m pip install requests lxml
+    python -m pip install requests opencv-python
 ```
