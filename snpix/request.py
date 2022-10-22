@@ -1,11 +1,19 @@
 from .utils import *
 
-def requestGET(self, url :str):
-    return rget(url, headers = self.DEFINED_Headers, proxies = self.DEFINED_Proxy)
+def requestGET(self, url :str, timeout :float= 12.0):
+    try:
+        return rget(url, headers = self.DEFINED_Headers, proxies = self.DEFINED_Proxy, timeout = timeout)
+    except:
+        import os, sys
+        print(f'---> Thread: 链接获取发生错误，请检查网络情况.')
+        try: sys.exit(1)
+        except:
+            try: os._exit(1)
+            except: exit(1)
 
 def initializeDownload(self, folder :str):
     self.DEFINED_Headers['Referer'] = Referer
-    if not exists(folder): mkdir(folder)
+    CheckDirectory(folder)
     print(f'>>>> 开始下载作品.')
 
 class pixiv:

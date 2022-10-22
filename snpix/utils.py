@@ -7,7 +7,7 @@ from typing   import Union, List
 import ctypes, cv2, re, threading
 
 # 终端输出颜色
-GOLD, CYAN, RESET = "\x1b[93m", "\x1b[96m", "\x1b[0m"
+RED, GOLD, CYAN, RESET = "\x1b[91m", "\x1b[93m", "\x1b[96m", "\x1b[0m"
 
 # 宏定义
 UserAgent = 'Mozilla/5.0 (X11; Linux x86_64; rv:97.0) Gecko/20100101 Firefox/97.0'
@@ -77,7 +77,7 @@ def SetFileName(url :str):
     fileName = fileName.replace('/', '_')
     return fileName
 
-# 一堆jpg转gif
+# 一堆jpg转mp4
 def jpg2mp4(in_path :List[str], out_path :str, fps :int = 15):
     img_array = []
     for filename in in_path:
