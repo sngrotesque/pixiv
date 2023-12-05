@@ -1,5 +1,7 @@
 # Pixiv - Web crawler❤
 
+# 此版本的代码已不可用，请等待后续维护和修改。
+
 > 由SN-Grotesque开发并维护
 
 > 关于此代码的开发和维护：<br>
